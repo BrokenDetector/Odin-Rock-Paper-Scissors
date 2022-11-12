@@ -1,9 +1,53 @@
 <!DOCTYPE html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Rock Paper Scissors</title>
-    </head>
-    <body>
-        <script src="js/index.js"></script>
-    </body>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link href="css/main.css" rel="stylesheet" type="text/css">
+    <title>Rock Paper Scissors</title>
+</head>
+
+<body>
+    <header class header>
+        <h1>Rock Paper Scissors</h1>
+    </header>
+    <div class="scoreboard">
+        <div class="result">
+            <h3 id="scoreMessage"></h3>
+        </div>
+        <div class="score">
+            <p id="playerScore">You: 0</p>
+            <p id="computerScore">Computer: 0</p>
+        </div>
+    </div>
+    <div class="items">
+        <div class="item">
+            <button class="item-btn" id="rockBtn" type="button">Rock</button>
+        </div>
+        <div class="item">
+            <button class="item-btn" id="paperBtn" type="button">Paper</button>
+        </div>
+        <div class="item">
+            <button class="item-btn" id="scissorsBtn" type="button">Scissors</button>
+        </div>
+    </div>
+    <div class="selections">
+        <div class="list">
+            <h2>Player</h2>
+            <div class="pSelections">
+                <!-- Player Selections -->
+            </div>
+        </div>
+        <div class="list">
+            <h2>Computer</h2>
+            <div class="cSelections">
+                <!-- Computer Selections -->
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="js/index.js">
+</script>
+
 </html>

@@ -1,48 +1,103 @@
-let p = 0;
-let c = 0;
+function playRound(playerSelection, computerSelection) {
+
+    //console.log('You: ' + playerSelection);
+    //console.log('Computer: ' + computerSelection);
+    elementPlayerSelections.appendChild(addSelections(playerSelection));
+    elementComputerSelections.appendChild(addSelections(computerSelection));
+
+    if (playerSelection === computerSelection) {
+        player_count++
+        computer_count++
+        scoreMessage.textContent = `It's a tie! You both picked ${playerSelection}`
+        return
+    }
+    if (playerSelection === "rock" && computerSelection === "scissors") {
+        player_count++
+        scoreMessage.textContent = `You win! Rock beats Scissors`
+        return;
+    }
+    if (playerSelection === "paper" && computerSelection === "rock") {
+        player_count++
+        scoreMessage.textContent = `You win! Paper beats Rock`
+        return;
+    }
+    if (playerSelection === "scissors" && computerSelection === "paper") {
+        player_count++
+        scoreMessage.textContent = `You win! Scissors beats Paper`
+        return;
+    }
+    else {
+        computer_count++
+        scoreMessage.textContent = `You lose! ${computerSelection} beats ${playerSelection}`
+        return;
+    }
+}
+
+const scoreMessage = document.getElementById('scoreMessage');
+const rockButton = document.getElementById('rockBtn');
+const paperButton = document.getElementById('paperBtn');
+const scissorsButton = document.getElementById('scissorsBtn');
+const playerScore = document.getElementById('playerScore');
+const computerScore = document.getElementById('computerScore');
+let player_count = 0;
+let computer_count = 0;
+
+rockButton.addEventListener('click', () => handleClick('rock'))
+paperButton.addEventListener('click', () => handleClick('paper'))
+scissorsButton.addEventListener('click', () => handleClick('scissors'))
+
+function addSelections(name) {
+    let parag = document.createElement('p');
+    parag.setAttribute("id", "rmElement");
+    parag.textContent = name;
+    return parag;
+}
 
 function getComputerChoice() {
     const items = Array("rock", "paper", "scissors");
     return items[Math.floor(Math.random() * items.length)];
 }
 
-function playRound(playerSelection, computerSelection) {
+function handleClick(playerSelection) {
+    const computerSelection = getComputerChoice();
+    playRound(playerSelection, computerSelection);
+    updateScore()
+}
 
-    console.log(playerSelection);
-    console.log(computerSelection);    
+function updateScore() {
 
-    if (playerSelection === computerSelection) {
-        p++
-        c++
-        return "It's a tie! you both picked " + playerSelection;
+    playerScore.textContent = `You: ${player_count}`
+    computerScore.textContent = `Computer: ${computer_count}`
+
+    if (player_count == 5 & computer_count == 5) {
+        alert("It's a tie! " + player_count + ':' + computer_count)
+        reset()
     }
-    if (playerSelection === "rock" && computerSelection === "scissors") {
-        p++
-        return "You win! Rock beats Scissorc";
+
+    if (player_count == 5) {
+        alert('You win! ' + player_count + ':' + computer_count)
+        reset()
     }
-    if (playerSelection === "paper" && computerSelection === "rock") {
-        p++
-        return "You win! Paper beats Rock";
-    }
-    if (playerSelection === "sicssos" && computerSelection === "paper") {
-        p++
-        return "You win! Scissors beats paper";
-    }
-    else {
-        c++
-        return "You lose! " + computerSelection + " beats " + playerSelection;
+    if (computer_count == 5) {
+        alert('You lose! ' + player_count + ':' + computer_count)
+        reset()
     }
 }
 
-function game(playRound) {
-    for (let i = 0; i < 5; i++) {
-        let playerSelection = prompt("Choose Rock, Paper or Scissors");
-        const computerSelection = getComputerChoice();
+const elementPlayerSelections = document.querySelector('.pSelections');
+const elementComputerSelections = document.querySelector('.cSelections');
 
-        console.log(playRound(playerSelection, computerSelection));
-        console.log(i);
-        console.log("You: " + p + " Computer: " + c);
-    }
+
+function reset() {
+    player_count = 0;
+    computer_count = 0;
+    playerScore.textContent = `You: ${player_count}`
+    computerScore.textContent = `Computer: ${computer_count}`
+    scoreMessage.textContent = ``
+
+    //reset selections
+    const list1 = elementPlayerSelections.childNodes;
+    const list2 = elementComputerSelections.childNodes;
+    elementPlayerSelections.remove(list1);
+    elementComputerSelections.remove(list2);
 }
-
-console.log(game(playRound))
