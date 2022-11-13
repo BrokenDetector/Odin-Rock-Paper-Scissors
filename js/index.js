@@ -86,6 +86,7 @@ function updateScore() {
 
 const elementPlayerSelections = document.querySelector('.pSelections');
 const elementComputerSelections = document.querySelector('.cSelections');
+const r = document.getElementById('rmElement')
 
 
 function reset() {
@@ -96,8 +97,6 @@ function reset() {
     scoreMessage.textContent = ``
 
     //reset selections
-    const list1 = elementPlayerSelections.childNodes;
-    const list2 = elementComputerSelections.childNodes;
-    elementPlayerSelections.remove(list1);
-    elementComputerSelections.remove(list2);
+    elementPlayerSelections.innerHTML = "";
+    elementComputerSelections.innerHTML = "";
 }
